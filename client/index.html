@@ -9,7 +9,8 @@
 <body>
     <header id="titulo"><h1>Registro de Eventos Climáticos Extremos</h1></header>
     <main>
-            <form action="http://localhost:3000/dados" method="post">
+        <section>
+            <form action="http://localhost:3000/eventos" method="post">
                 <input type="text" name="cidade" placeholder="Nome da cidade" required>
                 <input type="text" name="tipo_evento" placeholder="Tipo de evento" required>
                 <input type="number" step="0.01" name="temperatura_maxima" placeholder="Temperatura máxima" required>
@@ -17,7 +18,91 @@
                 <input type="text" name="nivel_impacto" placeholder="Nível de impacto" required>
                 <input id = "enviar" type="submit" value="Enviar">
             </form>
+            </main>
+            <section>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cidade</th>
+                        <th>Tipo de Evento</th>
+                        <th>Temperatura Máxima</th>
+                        <th>Data</th>
+                        <th>Nível de Impacto</th>
+                    </tr>
+                </thead>
+                <tbody id="dados"></tbody>
+            </table>
+        </section>
+    </main>
     </main>
     <footer><h2>by Lucky17-10001</h2></footer>
+
+    <script>
+        const dados = document.getElementById("dados");
+
+        async function carregarEventos() {
+            try {
+                const resposta = await fetch("http://localhost:3000/eventos");
+                const eventos = await resposta.json();
+
+                dados.innerHTML = eventos.map(evento => `
+                    <tr>
+                        <td contenteditable="true" id="cidade${evento.id}">${evento.cidade}</td>
+                        <td contenteditable="true" id="tipo_evento${evento.id}">${evento.tipo_evento}</td>
+                        <td contenteditable="true" id="temperatura_maxima${evento.id}">${evento.temperatura_maxima}</td>
+                        <td contenteditable="true" id="data${evento.id}">${evento.data}</td>
+                        <td contenteditable="true" id="nivel_impacto${evento.id}">${evento.nivel_impacto}</td>
+                        <td>
+                            <button type="button" onclick="alterar(${evento.id})">✏️</button>
+                            <button type="button" onclick="excluir(${evento.id})">🧽</button>
+                        </td>
+                    </tr>
+                `).join("");
+            } catch (erro) {
+                console.error("Erro ao carregar os eventos:", erro);
+            }
+        }
+
+        function alterar(id) {
+            const cidade = document.getElementById(`cidade${id}`).innerText.trim();
+            const tipo_evento = document.getElementById(`tipo_evento${id}`).innerText.trim();
+            const temperatura_maxima = Number(document.getElementById(`temperatura_maxima${id}`).innerText.trim());
+            const data = document.getElementById(`data${id}`).innerText.trim();
+            const nivel_impacto = document.getElementById(`nivel_impacto${id}`).innerText.trim();
+
+            const dadosAtualizados = {
+                cidade,
+                tipo_evento,
+                temperatura_maxima,
+                data,
+                nivel_impacto
+            };
+
+            fetch(`http://localhost:3000/eventos/${id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(dadosAtualizados)
+            })
+                .then(resp => {
+                    if (resp.status === 202) {
+                        window.location.reload();
+                    }
+                });
+        }
+
+        function excluir(id) {
+            if (confirm(`Confirma a exclusão do evento id = ${id}`)) {
+                fetch(`http://localhost:3000/eventos/${id}`, { method: "DELETE" })
+                    .then(resp => {
+                        if (resp.status === 200) {
+                            window.location.reload();
+                        }
+                    });
+            }
+        }
+
+        carregarEventos();
+    </script>
+
 </body>
 </html>

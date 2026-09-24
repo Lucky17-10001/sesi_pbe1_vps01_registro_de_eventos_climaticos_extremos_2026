@@ -1,6 +1,7 @@
 const express = require("express")
 const cors = require("cors")
 const eventos = require("./dados.json")
+const e = require("express")
 
 function autoIncrement() {
     return Number(eventos[eventos.length - 1].id) + 1
@@ -20,11 +21,10 @@ const cadastrarEvento = (req, res) => {
 }
 
 const rotaInicial = (req, res) => {
-    res.json("Back-end respondendo")
+    res.json(eventos)
 }
 
 const readEvento = (req, res) => {
-    avaliaEventos()
     res.json(eventos)
 }
 
