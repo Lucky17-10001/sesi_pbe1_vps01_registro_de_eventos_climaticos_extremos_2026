@@ -1,0 +1,30 @@
+{
+  "name": "eventos_climaticos_extremos_backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "Eventos climáticos",
+    "extremos",
+    "clima"
+  ],
+  "author": "Lucky17-10001",
+  "license": "ISC",
+  "description": "Servidor backend REST js",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lucky17-10001/sesi_pbe1_vps01_registro_de_eventos_climaticos_extremos_2026.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Lucky17-10001/sesi_pbe1_vps01_registro_de_eventos_climaticos_extremos_2026/issues"
+  },
+  "homepage": "https://github.com/Lucky17-10001/sesi_pbe1_vps01_registro_de_eventos_climaticos_extremos_2026#readme"
+}
