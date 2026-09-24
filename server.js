@@ -29,7 +29,6 @@ const readEvento = (req, res) => {
 }
 
 const buscaEvento = (req, res) => {
-    avaliaEventos()
     const evento = eventos.find(e => e.id == Number(req.params.id))
     if (evento) res.json(evento)
     else res.status(404).json("Id não encontrado")
