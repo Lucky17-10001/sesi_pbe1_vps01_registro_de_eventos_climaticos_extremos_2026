@@ -25,19 +25,19 @@ npm run dev
 
 ## Print dos testes e exemplo de requisições
 - CREATE
-![Create](./prints/screenshot01.png)
+![Create](./prints/post.png)
 - READ ALL
-![Read](./prints/screenshot02.png)
+![Read](./prints/getall.png)
 - BUSCAR
-![Find](./prints/screenshot06.png)
+![Find](./prints/get.png)
 - UPDATE
-![Update](./prints/screenshot03.png)
+![Update](./prints/put.png)
 - DELETE
-![Delete](./prints/screenshot04.png)
+![Delete](./prints/delete.png)
 
 ---
 
 ## Cliente
-- ![Formulário](./prints/screenshot05.png)
+- ![Formulário](./prints/formulario.png)
 - Resposta:
-- ![Formulário](./prints/screenshot07.png)
+- ![Formulário](./prints/answer.png)
